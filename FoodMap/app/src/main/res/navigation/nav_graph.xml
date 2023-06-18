@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/ListFragment">
+
+    <fragment
+        android:id="@+id/UsersFragment"
+        android:name="com.example.foodmap.UsersFragment"
+        android:label="@string/users_fragment_label"
+        tools:layout="@layout/fragment_users">
+
+        <action
+            android:id="@+id/action_UsersFragment_to_ListFragment"
+            app:destination="@id/ListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ListFragment"
+        android:name="com.example.foodmap.ListFragment"
+        android:label="@string/list_fragment_label"
+        tools:layout="@layout/fragment_list">
+
+        <action
+            android:id="@+id/action_ListFragment_to_RankFragment"
+            app:destination="@id/RankFragment" />
+        <action
+            android:id="@+id/action_ListFragment_to_UsersFragment"
+            app:destination="@id/UsersFragment" />
+        <action
+            android:id="@+id/action_ListFragment_to_EditFragment"
+            app:destination="@id/EditFragment" />
+        <action
+            android:id="@+id/action_ListFragment_to_ViewFragment"
+            app:destination="@id/ViewFragment" />
+        <action
+            android:id="@+id/action_ListFragment_to_MapFragment"
+            app:destination="@id/MapFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/EditFragment"
+        android:name="com.example.foodmap.EditFragment"
+        android:label="@string/edit_fragment_label"
+        tools:layout="@layout/fragment_edit">
+
+        <action
+            android:id="@+id/action_EditFragment_to_ListFragment"
+            app:destination="@id/ListFragment" />
+        <action
+            android:id="@+id/action_EditFragment_to_MapFragment"
+            app:destination="@id/MapFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/ViewFragment"
+        android:name="com.example.foodmap.ViewFragment"
+        android:label="@string/view_fragment_label"
+        tools:layout="@layout/fragment_view">
+        <action
+            android:id="@+id/action_ViewFragment_to_ListFragment"
+            app:destination="@id/ListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/MapFragment"
+        android:name="com.example.foodmap.MapFragment"
+        android:label="@string/map_fragment_label"
+        tools:layout="@layout/fragment_map">
+        <action
+            android:id="@+id/action_MapFragment_to_EditFragment"
+            app:destination="@id/EditFragment" />
+        <action
+            android:id="@+id/action_MapFragment_to_ListFragment"
+            app:destination="@id/ListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/RankFragment"
+        android:name="com.example.foodmap.RankFragment"
+        android:label="@string/rank_fragment_label"
+        tools:layout="@layout/fragment_rank">
+        <action
+            android:id="@+id/action_RankFragment_to_ListFragment"
+            app:destination="@id/ListFragment" />
+
+
+    </fragment>
+</navigation>

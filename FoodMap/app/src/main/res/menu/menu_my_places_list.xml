@@ -1,0 +1,21 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.foodmap.MainActivity">
+    <item
+        android:id="@+id/show_map_item"
+        android:orderInCategory="100"
+        android:title="@string/show_map"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/new_place_item"
+        android:orderInCategory="100"
+        android:title="@string/new_place"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/about_item"
+        android:orderInCategory="100"
+        android:title="@string/about"
+        app:showAsAction="never" />
+</menu>

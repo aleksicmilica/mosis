@@ -1,0 +1,88 @@
+<resources>
+    <string name="app_name">FoodMap</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="users_fragment_label">Korisnici</string>
+    <string name="second_fragment_label">Restorani</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="login_activity_login_button">ULOGUJ SE</string>
+    <string name="login_activity_register_button">REGISTRUJ SE</string>
+    <string name="login_activity_username_label">Korisničko ime:</string>
+    <string name="login_activity_password_label">Šifra:</string>
+    <string name="register_activity_username_label">Korisničko ime:</string>
+    <string name="register_activity_password_label">Šifra:</string>
+    <string name="register_activity_ime_label">Ime:</string>
+    <string name="register_activity_prezime_label">Prezime:</string>
+    <string name="register_activity_telefon_label">Telefon:</string>
+    <string name="register_activity_kamera_btn">KAMERA</string>
+    <string name="register_activity_galerija_btn">GALERIJA</string>
+    <string name="register_activity_ok_btn">OK</string>
+    <string name="register_activity_close_btn">ZATVORI</string>
+    <string name="show_map">Prikaži na mapi</string>
+    <string name="new_place">Novi restoran</string>
+    <string name="my_places_list">My Places</string>
+    <string name="users">Korisnici</string>
+    <string name="list_fragment_autor_rb">Autor</string>
+    <string name="list_fragment_tip_rb">Tip</string>
+    <string name="list_fragment_ocena_rb">Ocena</string>
+    <string name="list_fragment_datum_rb">Datum</string>
+    <string name="list_fragment_format_label">Format datuma je: ddMMyyyy</string>
+    <string name="list_fragment_datumod_label">Datum od:</string>
+    <string name="list_fragment_datumdo_label">Datum do:</string>
+    <string name="list_fragment_ok_btn">OK</string>
+    <string name="list_fragment_reset_label">PONIŠTI</string>
+
+    <string name="map_fragment_autor_rb">Autor</string>
+    <string name="map_fragment_tip_rb">Tip</string>
+    <string name="map_fragment_ocena_rb">Ocena</string>
+    <string name="map_fragment_datum_rb">Datum</string>
+    <string name="map_fragment_radius_rb">Radius</string>
+    <string name="map_fragment_format_label">Format datuma je: ddMMyyyy</string>
+    <string name="map_fragment_datumod_label">Datum od:</string>
+    <string name="map_fragment_datumdo_label">Datum do:</string>
+    <string name="map_fragment_ok_btn">OK</string>
+    <string name="map_fragment_reset_label">PONIŠTI</string>
+
+    <string name="edit_fragment_ime_label">Ime:</string>
+    <string name="edit_fragment_prezime_label">Prezime:</string>
+    <string name="edit_fragment_datum_label">Datum:</string>
+    <string name="edit_fragment_latituda_label">Latituda:</string>
+    <string name="edit_fragment_longituda_label">Longituda:</string>
+    <string name="edit_fragment_tip_label">Tip:</string>
+    <string name="edit_fragment_opis_label">Opis:</string>
+    <string name="edit_fragment_autor_label">Autor:</string>
+    <string name="edit_fragment_ocena_label">Prosečna ocena:</string>
+    <string name="edit_fragment_komentar_label">Komentar:</string>
+    <string name="edit_fragment_kamera_btn">KAMERA</string>
+    <string name="edit_fragment_galerija_btn">GALERIJA</string>
+    <string name="edit_fragment_save_btn">SAČUVAJ</string>
+    <string name="edit_fragment_cancel_btn">OTKAŽI</string>
+
+
+
+
+    <string name="editmyplace_name_label">Name</string>
+    <string name="editmyplace_description_label">Description</string>
+    <string name="editmyplace_add_label">Add</string>
+    <string name="editmyplace_cancel_label">Cancel</string>
+    <string name="list_fragment_label">Restorani</string>
+    <string name="edit_fragment_label">Novi restoran</string>
+    <string name="edit_fragment_save_label">Save</string>
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="title_activity_my_places_list">MyPlacesList</string>
+    <string name="view_fragment_label">Pregled</string>
+    <string name="viewmyplace_close_button">Zatvori</string>
+    <string name="map_fragment_label">Mapa</string>
+    <string name="rank_fragment_label">Rang lista</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_login">Leanback LoginActivity</string>
+
+
+    <string name="popup_menu_view">Pregledaj mesto</string>
+    <string name="popup_menu_edit">Izmeni mesto</string>
+    <string name="popup_menu_show">Prikaži na mapi</string>
+    <string name="popup_menu_rank">Oceni mesto</string>
+    <string name="title_activity_register">RegisterActivity</string>
+</resources>

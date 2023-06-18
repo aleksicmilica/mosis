@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MapFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RadioGroup
+            android:id="@+id/rgMap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/swMapa">
+
+            <RadioButton
+                android:id="@+id/rbAutoMap"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/map_fragment_autor_rb" />
+
+            <RadioButton
+                android:id="@+id/rbTipMap"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/map_fragment_tip_rb" />
+
+            <RadioButton
+                android:id="@+id/rbRadisuMap"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/map_fragment_radius_rb" />
+
+            <RadioButton
+                android:id="@+id/rbOcenaMap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/map_fragment_ocena_rb" />
+
+            <RadioButton
+                android:id="@+id/rbDatum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/map_fragment_datum_rb" />
+        </RadioGroup>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rgMap">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/map_fragment_format_label"
+                app:layout_constraintBottom_toTopOf="@id/tvDatumOd"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvDatumOd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/map_fragment_datumod_label"
+                app:layout_constraintTop_toBottomOf="@id/textView2"
+                app:layout_constraintBottom_toTopOf="@id/editTextDate"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <EditText
+                android:id="@+id/editTextDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:ems="10"
+                android:inputType="date"
+                app:layout_constraintBottom_toTopOf="@id/tvDatumDo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvDatumOd" />
+
+            <TextView
+                android:id="@+id/tvDatumDo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:text="@string/map_fragment_datumdo_label"
+                app:layout_constraintBottom_toTopOf="@id/editTextDate2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/editTextDate"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="45dp" />
+
+            <EditText
+                android:id="@+id/editTextDate2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:ems="10"
+                android:inputType="date"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvDatumDo" />
+
+            <Button
+                android:id="@+id/btnOk"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:layout_margin="40px"
+                android:text="@string/map_fragment_ok_btn"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/button3"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editTextDate2" />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="40px"
+                android:text="@string/map_fragment_reset_label"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toEndOf="@id/btnOk"
+                app:layout_constraintTop_toBottomOf="@+id/editTextDate2" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <org.osmdroid.views.MapView
+            android:id="@+id/map"
+            tilesource="Mapnik"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/constraintDate"/>
+
+        <SearchView
+            android:id="@+id/swMapa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

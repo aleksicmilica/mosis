@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/viewPlace"
+        android:title="@string/popup_menu_view"/>
+    <item
+        android:id="@+id/editPlace"
+        android:title="@string/popup_menu_edit"/>
+    <item
+        android:id="@+id/showOnMap"
+        android:title="@string/popup_menu_show"/>
+    <item
+        android:id="@+id/rankPlace"
+        android:title="@string/popup_menu_rank"/>
+
+</menu>

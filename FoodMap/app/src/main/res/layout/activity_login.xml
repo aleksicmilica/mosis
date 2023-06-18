@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_browse_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity"
+    tools:deviceIds="tv"
+    tools:ignore="MergeRootFrame" >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="60px"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loginSifraET">
+
+            <Button
+                android:id="@+id/loginBtnLog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10px"
+                android:layout_weight="1"
+                android:text="@string/login_activity_login_button" />
+
+            <Button
+                android:id="@+id/loginbtnRegister"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10px"
+                android:layout_weight="1"
+                android:text="@string/login_activity_register_button" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/loginUserNameTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="60px"
+            android:layout_marginTop="50dp"
+            android:text="@string/login_activity_username_label"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/loginSifraET"/>
+
+        <EditText
+            android:id="@+id/loginUserNameET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="60px"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loginUserNameTV" />
+
+        <TextView
+            android:id="@+id/loginSifraTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="60px"
+            android:gravity="center"
+            android:text="@string/login_activity_password_label"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loginUserNameET" />
+
+        <EditText
+            android:id="@+id/loginSifraET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="60px"
+            android:ems="10"
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loginSifraTV" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

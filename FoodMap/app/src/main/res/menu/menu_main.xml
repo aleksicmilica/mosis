@@ -1,0 +1,20 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.foodmap.MainActivity">
+    <item
+        android:id="@+id/action_show_map"
+        android:orderInCategory="100"
+        android:title="@string/show_map"
+         />
+    <item
+        android:id="@+id/action_new_place"
+        android:orderInCategory="100"
+        android:title="@string/new_place"
+         />
+
+    <item
+        android:id="@+id/action_users"
+        android:orderInCategory="100"
+        android:title="@string/users"
+        />
+</menu>
