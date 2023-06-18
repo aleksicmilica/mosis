@@ -213,6 +213,7 @@ class MapFragment : Fragment(), ILocationClient {
             try {
                 val result = withContext(Dispatchers.IO) {
                     db.collection("places")
+
                         .get()
                         .await()
                 }
@@ -439,6 +440,7 @@ class MapFragment : Fragment(), ILocationClient {
                         if (field.equals("ocena")) {
                             result = withContext(Dispatchers.IO) {
                                 db.collection("places")
+
                                     .get()
                                     .await()
 
@@ -508,6 +510,7 @@ class MapFragment : Fragment(), ILocationClient {
                                     db.collection("places")
                                         .whereGreaterThanOrEqualTo("date", tms1)
                                         .whereLessThanOrEqualTo("date", tms2)
+
                                         .get()
                                         .await()
 
@@ -517,6 +520,7 @@ class MapFragment : Fragment(), ILocationClient {
                                 result = withContext(Dispatchers.IO) {
                                     db.collection("places")
                                         .whereGreaterThanOrEqualTo("date", tms1)
+
                                         .get()
                                         .await()
 
@@ -531,6 +535,7 @@ class MapFragment : Fragment(), ILocationClient {
                                 result = withContext(Dispatchers.IO) {
                                     db.collection("places")
                                         .whereEqualTo(field, value)
+
                                         .get()
                                         .await()
 
@@ -540,6 +545,7 @@ class MapFragment : Fragment(), ILocationClient {
                                 result = withContext(Dispatchers.IO) {
                                     db.collection("places")
                                         .whereGreaterThanOrEqualTo(field, value)
+
                                         .get()
                                         .await()
                                 }

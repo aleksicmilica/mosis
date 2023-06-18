@@ -136,7 +136,7 @@ class UsersFragment : Fragment() {
         return when (item.itemId) {
 
             R.id.action_new_place -> {
-                this.findNavController().navigate(R.id.action_HomeFragment_to_EditFragment)
+                this.findNavController().navigate(R.id.action_ListFragment_to_EditFragment)
                 true
             }
             else -> super.onOptionsItemSelected(item)

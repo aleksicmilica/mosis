@@ -11,6 +11,8 @@ import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.*
 import android.widget.*
@@ -128,7 +130,20 @@ class EditFragment : Fragment() {
             val currentDate = dateFormat.format(calendar.time)
             editDate.setText(currentDate)
 
+            editName.addTextChangedListener(object :TextWatcher{
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
+                }
+
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+                }
+
+                override fun afterTextChanged(p0: Editable?) {
+                    addButton.isEnabled = p0.toString().isNotEmpty()
+                }
+
+            })
 
             editAutor.setText(userName)
 

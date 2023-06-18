@@ -13,6 +13,7 @@ import com.example.foodmap.data.UserObject
 import com.example.foodmap.databinding.FragmentListBinding
 import com.example.foodmap.model.MyPlacesListAdapter
 import com.example.foodmap.model.MyPlacesViewModel
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -96,6 +97,7 @@ class ListFragment : Fragment() {
             try {
                 val result = withContext(Dispatchers.IO) {
                     db.collection("places")
+
                         .get()
                         .await()
                 }
@@ -165,6 +167,7 @@ class ListFragment : Fragment() {
                 if (field.equals("ocena")) {
                     result = withContext(Dispatchers.IO) {
                         db.collection("places")
+
                             .get()
                             .await()
 
@@ -232,6 +235,7 @@ class ListFragment : Fragment() {
                                 db.collection("places")
                                     .whereGreaterThanOrEqualTo("date", tms1)
                                     .whereLessThanOrEqualTo("date", tms2)
+
                                     .get()
                                     .await()
 
@@ -240,6 +244,7 @@ class ListFragment : Fragment() {
                             result = withContext(Dispatchers.IO) {
                                 db.collection("places")
                                     .whereLessThanOrEqualTo("date", tms2)
+
                                     .get()
                                     .await()
 
@@ -248,6 +253,7 @@ class ListFragment : Fragment() {
                             result = withContext(Dispatchers.IO) {
                                 db.collection("places")
                                     .whereGreaterThanOrEqualTo("date", tms1)
+
                                     .get()
                                     .await()
 
@@ -261,6 +267,7 @@ class ListFragment : Fragment() {
                             result = withContext(Dispatchers.IO) {
                                 db.collection("places")
                                     .whereEqualTo(field, query)
+
                                     .get()
                                     .await()
 
@@ -271,6 +278,7 @@ class ListFragment : Fragment() {
                             result = withContext(Dispatchers.IO) {
                                 db.collection("places")
                                     .whereGreaterThanOrEqualTo(field, query)
+
                                     .get()
                                     .await()
                             }
@@ -310,7 +318,7 @@ class ListFragment : Fragment() {
                 }
                 R.id.rbTip -> {
                     searchType = "tip"
-                    searchType = "autor"
+
                     var datod = binding.editTextDate
                     datod.setText("")
                     var datdo = binding.editTextDate2
@@ -318,7 +326,7 @@ class ListFragment : Fragment() {
                 }
                 R.id.rbOcena -> {
                     searchType = "ocena"
-                    searchType = "autor"
+
                     var datod = binding.editTextDate
                     datod.setText("")
                     var datdo = binding.editTextDate2
