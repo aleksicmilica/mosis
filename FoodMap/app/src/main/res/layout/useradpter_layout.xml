@@ -10,6 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+
         android:text="Korisnik:"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/tvUserUserName"
@@ -22,7 +23,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/tvNameLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvUserLayout" />
 
@@ -31,6 +31,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+
+        android:layout_marginTop="16dp"
         android:text="Ime:"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/tvUserName"
@@ -43,7 +45,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/tvSurnameLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvNameLayout" />
 
@@ -52,6 +53,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+
+        android:layout_marginTop="16dp"
         android:text="Prezime:"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/tvUserSurname"
@@ -63,6 +66,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
         android:text="TextView"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -74,6 +78,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
+
         android:text="Broj dodatih mesta:"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/tvAddCount"
@@ -94,6 +99,8 @@
         android:id="@+id/tvCommentsLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+
         android:layout_marginEnd="16dp"
         android:text="Broj komentara:"
         android:textSize="16sp"
@@ -107,7 +114,6 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/tvCommentsLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvStartLayout" />
 
@@ -115,6 +121,8 @@
         android:id="@+id/tvStartLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+
         android:layout_marginEnd="16dp"
         android:text="Broj ocena:"
         android:textSize="16sp"
@@ -128,7 +136,6 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/tvStartLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvAddLayout" />
 </androidx.constraintlayout.widget.ConstraintLayout>
