@@ -41,7 +41,7 @@ class ViewFragment : Fragment() {
 
 
         binding.ViewFragmentName.text = myPlacesViewModel.selected?.name
-        binding.ViewFragmentDesc.text = myPlacesViewModel.selected?.description
+        //binding.ViewFragmentDesc.text = myPlacesViewModel.selected?.description
         binding.ViewFragmentAutor.text = myPlacesViewModel.selected?.autor
 
 

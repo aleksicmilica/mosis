@@ -62,18 +62,22 @@ class MainActivity : AppCompatActivity(), ILocationClient {
     }
 
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+   /* override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
 
-            R.id.action_show_map -> {
+           *//* R.id.action_show_map -> {
                 if (navController.currentDestination?.id == R.id.ListFragment)
                     navController.navigate(R.id.action_ListFragment_to_MapFragment)
-            }
+            }*//*
+           *//* R.id.action_users -> {
+                if (navController.currentDestination?.id == R.id.ListFragment)
+                    navController.navigate(R.id.action_ListFragment_to_UsersFragment)
+            }*//*
         }
 
         return super.onOptionsItemSelected(item)
-    }
+    }*/
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
@@ -89,5 +93,16 @@ class MainActivity : AppCompatActivity(), ILocationClient {
     override fun onDestroy() {
         locationClient?.stop()
         super.onDestroy()
+    }
+
+    override fun onPause() {
+        locationClient?.setILocationClient(null)
+        super.onPause()
+    }
+
+    override fun onResume() {
+
+        super.onResume()
+        locationClient?.setILocationClient(this)
     }
 }

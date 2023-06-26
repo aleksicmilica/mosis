@@ -83,31 +83,19 @@ class MapFragment : Fragment(), ILocationClient {
             when (checkedId) {
                 R.id.rbAutoMap -> {
                     searchType = "autor"
-                    var datod = binding.editTextDate
-                    datod.setText("")
-                    var datdo = binding.editTextDate2
-                    datdo.setText("")
+
 
                 }
                 R.id.rbTipMap -> {
                     searchType = "tip"
-                    var datod = binding.editTextDate
-                    datod.setText("")
-                    var datdo = binding.editTextDate2
-                    datdo.setText("")
+
                 }
                 R.id.rbRadisuMap -> {
                     searchType = "radius"
-                    var datod = binding.editTextDate
-                    datod.setText("")
-                    var datdo = binding.editTextDate2
-                    datdo.setText("")
+
                 }
                 R.id.rbOcenaMap -> {
-                    var datod = binding.editTextDate
-                    datod.setText("")
-                    var datdo = binding.editTextDate2
-                    datdo.setText("")
+
                     searchType = "ocena"
                 }
                 R.id.rbDatum -> {
@@ -130,12 +118,23 @@ class MapFragment : Fragment(), ILocationClient {
                     lastCheckedRadioButton = radioButton
                     radioButton.isChecked = true
                 }
+                binding.swMapa.setQuery("",false)
+                binding.swMapa.clearFocus()
+                var datod = binding.editTextDate
+                datod.setText("")
+                var datdo = binding.editTextDate2
+                datdo.setText("")
             }
         }
 
         btn2.setOnClickListener {
             radioGroup.clearCheck()
-
+            binding.swMapa.setQuery("",false)
+            binding.swMapa.clearFocus()
+            var datod = binding.editTextDate
+            datod.setText("")
+            var datdo = binding.editTextDate2
+            datdo.setText("")
             resetMap()
         }
 
@@ -156,6 +155,7 @@ class MapFragment : Fragment(), ILocationClient {
                 android.Manifest.permission.ACCESS_FINE_LOCATION
             )
         } else {
+            Log.d("TAGA",myPlacesViewModel.myPlacesList.size.toString())
             setupMap(myPlacesViewModel.myPlacesList)
         }
 
@@ -195,7 +195,7 @@ class MapFragment : Fragment(), ILocationClient {
                     data["tip"].toString(),
                     date,
                     data["url"].toString(),
-                    data["description"].toString(),
+                    //data["description"].toString(),
                     grades,
                     comments, document.id
 
@@ -238,7 +238,7 @@ class MapFragment : Fragment(), ILocationClient {
 
     private fun setupMap(list: ArrayList<MyPlace>) {
         removeAllMarkers(map)
-
+        val location = MainActivity.curLocation
         myMarker = Marker(map)
 
 
@@ -246,7 +246,11 @@ class MapFragment : Fragment(), ILocationClient {
             ResourcesCompat.getDrawable(resources, org.osmdroid.library.R.drawable.person, null)
 
         myMarker.apply {
-            this.position = GeoPoint(0.0, 0.0)
+
+            if (location != null)
+                this.position=GeoPoint(location.latitude, location.longitude)
+            else
+                this.position = GeoPoint(0.0, 0.0)
             setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER)
             setOnMarkerClickListener { _, _ ->
                 false
@@ -266,7 +270,7 @@ class MapFragment : Fragment(), ILocationClient {
 
 
 
-        val location = MainActivity.curLocation
+
         var startPoint: GeoPoint = if (location == null)
             GeoPoint(43.32289, 21.8925)
         else
@@ -410,9 +414,8 @@ class MapFragment : Fragment(), ILocationClient {
 
                                         }
                                         var url: String =
-                                            "places/" + document.getString("name") + data?.get("latitude")
-                                                .toString() + data?.get("longitude")
-                                                .toString() + ".jpg"
+                                            "places/" + document.reference.id + ".jpg"
+                                        Log.d("TAGA",url)
                                         myPlacesViewModel
                                             .addPlace(
                                                 MyPlace(
@@ -422,11 +425,11 @@ class MapFragment : Fragment(), ILocationClient {
                                                     data?.get("autor").toString(),
                                                     data?.get("tip").toString(),
                                                     date,
-                                                    data?.get("description").toString(),
+                                                    //data?.get("description").toString(),
                                                     url,
                                                     grades,
                                                     comments,
-                                                    ""
+                                                    document.reference.id
                                                 )
                                             )
 
@@ -482,7 +485,7 @@ class MapFragment : Fragment(), ILocationClient {
                                                 data["autor"].toString(),
                                                 data["tip"].toString(),
                                                 date,
-                                                data["description"].toString(),
+                                                //data["description"].toString(),
                                                 url,
                                                 grades,
                                                 comments,
@@ -540,18 +543,26 @@ class MapFragment : Fragment(), ILocationClient {
                                         .await()
 
                                 }
+                                myPlacesViewModel.myPlacesList.addAll(createList(result))
 
                             } else {
                                 result = withContext(Dispatchers.IO) {
                                     db.collection("places")
-                                        .whereGreaterThanOrEqualTo(field, value)
-
                                         .get()
                                         .await()
                                 }
+                                var list=createList(result)
+                                list = list.filter { it ->
+                                    when(field){
+                                        "autor"->it.autor.startsWith(value)
+                                        "tip" ->it.tip.startsWith(value)
+                                        else->it.name.startsWith(value)
+                                    }
+                                } as ArrayList<MyPlace>
+                                myPlacesViewModel.myPlacesList.addAll(list)
 
                             }
-                            myPlacesViewModel.myPlacesList.addAll(createList(result))
+
 
                             setupMap(myPlacesViewModel.myPlacesList)
                         }
@@ -599,6 +610,11 @@ class MapFragment : Fragment(), ILocationClient {
     }
 
     override fun onPause() {
+        val radioGroup: RadioGroup = requireView().findViewById(R.id.rgMap)
+        radioGroup.clearCheck()
+        val searchView: SearchView = binding.swMapa
+        searchView.setQuery("",false)
+        searchView.clearFocus()
         super.onPause()
         map.onPause()
     }

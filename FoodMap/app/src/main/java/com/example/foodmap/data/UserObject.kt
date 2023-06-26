@@ -10,5 +10,5 @@ object UserObject {
     var addCount: Double? = 0.0
     var startCount: Double? = 0.0
     var commentsCount: Double? = 0.0
-    var id: String? = null
+    var id:String?=null
 }

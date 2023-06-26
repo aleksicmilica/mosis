@@ -11,7 +11,7 @@ data class MyPlace(
     var tip:String,
     var createdAt: Date?,
     var url:String,
-    var description: String,
+  //  var description: String,
     var grades:HashMap<String,Double>,
     var comments:HashMap<String,String>,
     @Transient var id:String){

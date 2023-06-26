@@ -1,11 +1,13 @@
 package com.example.foodmap
 
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.*
 import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.foodmap.data.MyPlace
 import com.example.foodmap.data.User
@@ -24,6 +26,7 @@ import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class ListFragment : Fragment() {
 
@@ -34,9 +37,6 @@ class ListFragment : Fragment() {
     private val binding get() = _binding!!
     private var searchType: String = "name"
     private var userName: String = UserObject.username!!
-    private lateinit var myUser: User
-
-
     var lastCheckedRadioButton: RadioButton? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -78,7 +78,7 @@ class ListFragment : Fragment() {
                     data["tip"].toString(),
                     date,
                     data["url"].toString(),
-                    data["description"].toString(),
+                    //data["description"].toString(),
                     grades,
                     comments, document.id
 
@@ -91,19 +91,19 @@ class ListFragment : Fragment() {
 
     fun getList() {
 
-        myPlacesViewModel.myPlacesList.clear()
 
-        CoroutineScope(Dispatchers.Main).launch {
+
+        viewLifecycleOwner.lifecycleScope.launch {
             try {
+
                 val result = withContext(Dispatchers.IO) {
                     db.collection("places")
-
                         .get()
                         .await()
                 }
-
+                myPlacesViewModel.myPlacesList.clear()
                 myPlacesViewModel.myPlacesList.addAll(createList(result))
-
+                Log.d("TAGA","s"+myPlacesViewModel.myPlacesList.size.toString())
                 showList(requireView(), myPlacesViewModel.myPlacesList)
             } catch (e: Exception) {
                 Log.w("TAGA", "Greska", e)
@@ -160,14 +160,12 @@ class ListFragment : Fragment() {
     fun getAndShowFiltredList(field: String, query: String, tip: Int) {
         myPlacesViewModel.myPlacesList.clear()
 
-
         CoroutineScope(Dispatchers.Main).launch {
             try {
                 var result: QuerySnapshot
                 if (field.equals("ocena")) {
                     result = withContext(Dispatchers.IO) {
                         db.collection("places")
-
                             .get()
                             .await()
 
@@ -210,7 +208,7 @@ class ListFragment : Fragment() {
                                         data["tip"].toString(),
                                         date,
                                         url,
-                                        data["description"].toString(),
+                                        //data["description"].toString(),
                                         grades,
                                         comments, document.id
 
@@ -235,30 +233,19 @@ class ListFragment : Fragment() {
                                 db.collection("places")
                                     .whereGreaterThanOrEqualTo("date", tms1)
                                     .whereLessThanOrEqualTo("date", tms2)
-
                                     .get()
                                     .await()
 
                             }
-                        else if (ts1 == 0L) {
-                            result = withContext(Dispatchers.IO) {
-                                db.collection("places")
-                                    .whereLessThanOrEqualTo("date", tms2)
-
-                                    .get()
-                                    .await()
-
-                            }
-                        } else
+                        else
                             result = withContext(Dispatchers.IO) {
                                 db.collection("places")
                                     .whereGreaterThanOrEqualTo("date", tms1)
-
                                     .get()
                                     .await()
 
                             }
-
+                        myPlacesViewModel.myPlacesList.addAll(createList(result))
 
                     } else {
 
@@ -272,23 +259,31 @@ class ListFragment : Fragment() {
                                     .await()
 
                             }
+                            myPlacesViewModel.myPlacesList.addAll(createList(result))
 
                         } else {
 
                             result = withContext(Dispatchers.IO) {
                                 db.collection("places")
-                                    .whereGreaterThanOrEqualTo(field, query)
-
                                     .get()
                                     .await()
                             }
-
+                            var list=createList(result)
+                            list = list.filter { it ->
+                                when(field){
+                                    "autor"->it.autor.startsWith(query)
+                                    "tip" ->it.tip.startsWith(query)
+                                    else->it.name.startsWith(query)
+                                }
+                            } as ArrayList<MyPlace>
+                            myPlacesViewModel.myPlacesList.addAll(list)
                         }
 
                     }
 
 
-                    myPlacesViewModel.myPlacesList.addAll(createList(result))
+
+                    //Log.d("TAGA",myPlacesViewModel.myPlacesList.size.toString())
                     showList(requireView(), myPlacesViewModel.myPlacesList)
                 }
             } catch (e: Exception) {
@@ -310,27 +305,15 @@ class ListFragment : Fragment() {
             when (checkedId) {
                 R.id.rbAutorTabela -> {
                     searchType = "autor"
-                    val datod = binding.editTextDate
-                    datod.setText("")
-                    val datdo = binding.editTextDate2
-                    datdo.setText("")
 
                 }
                 R.id.rbTip -> {
                     searchType = "tip"
 
-                    var datod = binding.editTextDate
-                    datod.setText("")
-                    var datdo = binding.editTextDate2
-                    datdo.setText("")
                 }
                 R.id.rbOcena -> {
                     searchType = "ocena"
 
-                    var datod = binding.editTextDate
-                    datod.setText("")
-                    var datdo = binding.editTextDate2
-                    datdo.setText("")
                 }
                 R.id.rbDatumTabela -> {
                     searchType = "datum"
@@ -353,6 +336,12 @@ class ListFragment : Fragment() {
                     lastCheckedRadioButton = radioButton
                     radioButton.isChecked = true
                 }
+                binding.svTable.setQuery("",false)
+                binding.svTable.clearFocus()
+                val datod = binding.editTextDate
+                datod.setText("")
+                val datdo = binding.editTextDate2
+                datdo.setText("")
             }
         }
 
@@ -360,6 +349,8 @@ class ListFragment : Fragment() {
 
         btn2.setOnClickListener {
             radioGroup.clearCheck()
+            binding.svTable.setQuery("",false)
+            binding.svTable.clearFocus()
             getList()
         }
 
@@ -480,6 +471,10 @@ class ListFragment : Fragment() {
                 this.findNavController().navigate(R.id.action_ListFragment_to_UsersFragment)
                 true
             }
+            R.id.action_show_map -> {
+                this.findNavController().navigate(R.id.action_ListFragment_to_MapFragment)
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -493,6 +488,7 @@ class ListFragment : Fragment() {
         super.onResume()
         val searchView: SearchView = binding.svTable
         searchType = "name"
+
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 if (searchType.equals("ocena") && query.toIntOrNull() == null)
@@ -504,16 +500,28 @@ class ListFragment : Fragment() {
 
 
             override fun onQueryTextChange(newText: String): Boolean {
-                if (newText.isNotEmpty())
-                    if (searchType.equals("ocena") && newText.toIntOrNull() == null) {
 
-                        Toast.makeText(requireContext(), "Unesite broj", Toast.LENGTH_SHORT).show()
-                    } else
-                        getAndShowFiltredList(searchType, newText, 1)
-                else
-                    getList()
+
+                    if (newText.isNotEmpty())
+                        if (searchType.equals("ocena") && newText.toIntOrNull() == null) {
+
+                            Toast.makeText(requireContext(), "Unesite broj", Toast.LENGTH_SHORT).show()
+                        } else
+                            getAndShowFiltredList(searchType, newText, 1)
+                    else
+                        getList()
+
                 return true
             }
         })
+    }
+
+    override fun onPause() {
+        val radioGroup: RadioGroup = requireView().findViewById(R.id.rgTable)
+        radioGroup.clearCheck()
+        val searchView: SearchView = binding.svTable
+        searchView.setQuery("",false)
+        searchView.clearFocus()
+        super.onPause()
     }
 }

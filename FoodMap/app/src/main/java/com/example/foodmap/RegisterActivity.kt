@@ -162,12 +162,13 @@ class RegisterActivity : AppCompatActivity() {
                             var imageView: ImageView = binding.imgUser
                             imageView.isDrawingCacheEnabled = true
                             imageView.buildDrawingCache()
-                            val bitmap = (imageView.drawable as BitmapDrawable).bitmap
-                            val baos = ByteArrayOutputStream()
-                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-                            val data = baos.toByteArray()
-                            userRef.putBytes(data).await()
-
+                            if (imageView.drawable is BitmapDrawable) {
+                                val bitmap = (imageView.drawable as BitmapDrawable).bitmap
+                                val baos = ByteArrayOutputStream()
+                                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+                                val data = baos.toByteArray()
+                                userRef.putBytes(data).await()
+                            }
 
                             db.collection("users")
                                 .add(user)
@@ -188,7 +189,7 @@ class RegisterActivity : AppCompatActivity() {
                                     )
                                     var intent: Intent =
                                         Intent(this@RegisterActivity, MainActivity::class.java)
-                                    intent.putExtra("user", user)
+                                   // intent.putExtra("user", user)
                                     UserObject.apply {
                                         this.username = user.username
                                         this.password = user.password
@@ -244,11 +245,6 @@ class RegisterActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         val imageView: ImageView = findViewById<ImageView>(R.id.imgUser)
-
-
-
-
-
 
         if (requestCode == CAMERA_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
             val image: Bitmap? = data.extras?.get("data") as Bitmap

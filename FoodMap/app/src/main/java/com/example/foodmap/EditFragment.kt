@@ -63,7 +63,7 @@ class EditFragment : Fragment() {
         var addButton: Button = requireView().findViewById<Button>(R.id.editFragmentAddButton)
 
         val editName: EditText = requireView().findViewById<EditText>(R.id.EditFragmentNameET)
-        val editDesc: EditText = requireView().findViewById<EditText>(R.id.EditFragmentOpisET)
+        //val editDesc: EditText = requireView().findViewById<EditText>(R.id.EditFragmentOpisET)
         val editLongitude: EditText = requireView().findViewById<EditText>(R.id.EditFragmentLonET)
         val editLatitude: EditText = requireView().findViewById<EditText>(R.id.EditFragmentLatET)
         val editAutor: EditText = requireView().findViewById<EditText>(R.id.EditFragmentAutorET)
@@ -85,7 +85,7 @@ class EditFragment : Fragment() {
         if (myPlacesViewModel.selected != null) {
             addButton.isEnabled = true
             editName.setText(myPlacesViewModel.selected?.name)
-            editDesc.setText(myPlacesViewModel.selected?.description)
+           // editDesc.setText(myPlacesViewModel.selected?.description)
             editLongitude.setText(myPlacesViewModel.selected?.longitude.toString())
             editLatitude.setText(myPlacesViewModel.selected?.latitude.toString())
             editTip.setText(myPlacesViewModel.selected?.tip)
@@ -157,13 +157,13 @@ class EditFragment : Fragment() {
 
 
             val name: String = editName.text.toString()
-            val desc: String = editDesc.text.toString()
+           // val desc: String = editDesc.text.toString()
             val longitude: String = editLongitude.text.toString()
             val latitude: String = editLatitude.text.toString()
             val autor: String = editAutor.text.toString()
             val date: Date = dateFormat.parse(editDate.text.toString())
             var starsCount: Long = 0L
-            var kommCount: Long = 0L
+            //var kommCount: Long = 0L
 
             val grades = HashMap<String, Double>()
             if (ratGrade.rating.toDouble() != 0.0) {
@@ -176,7 +176,7 @@ class EditFragment : Fragment() {
 
             if (myPlacesViewModel.selected != null) {
                 myPlacesViewModel.selected?.name = name
-                myPlacesViewModel.selected?.description = desc
+               // myPlacesViewModel.selected?.description = desc
                 myPlacesViewModel.selected?.latitude = latitude
                 myPlacesViewModel.selected?.longitude = longitude
 
@@ -191,7 +191,7 @@ class EditFragment : Fragment() {
                     "longitude" to longitude,
                     "tip" to tip,
                     "date" to date,
-                    "descriptiom" to desc,
+                    //"descriptiom" to desc,
 
                     )
 
@@ -203,12 +203,13 @@ class EditFragment : Fragment() {
                             "Uspesno promenjene informacije o mestu",
                             Toast.LENGTH_SHORT
                         ).show()
+
                     }
                     .addOnFailureListener { exception ->
 
                         Log.e("TAG", "Greška pri ažuriranju dokumenta", exception)
                     }
-
+                findNavController().popBackStack()
 
             } else {
 
@@ -219,7 +220,7 @@ class EditFragment : Fragment() {
                     autor,
                     tip,
                     date,
-                    desc,
+                    //desc,
                     "",
                     grades,HashMap() , ""
                 )
@@ -240,7 +241,7 @@ class EditFragment : Fragment() {
                     "autor" to autor,
                     "tip" to tip,
                     "date" to date,
-                    "descriptiom" to desc,
+                    //"descriptiom" to desc,
                     "url" to "",
                     "grades" to grades,
                     "geohash" to hash

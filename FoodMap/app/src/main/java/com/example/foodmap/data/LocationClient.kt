@@ -38,7 +38,7 @@ class LocationClient constructor(
 
     }
 
-    fun setILocationClient(iLocationClient: ILocationClient){
+    fun setILocationClient(iLocationClient: ILocationClient?){
         this.iLocationClient = iLocationClient
     }
 
